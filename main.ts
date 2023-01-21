@@ -4,6 +4,37 @@ enum SpriteKindLegacy {
     Food,
     Enemy
 }
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    nextcard3 = myShoe.nextCard
+    mysprite4 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    mysprite4.setImage(myShoe.getCardImage(nextcard3, CardSpriteSize.ThirtyTwoByThirtyTwo))
+    mysprite4.sayText(nextcard3.name)
+    pause(2000)
+    total = nextCard.faceValue + (nextcard2.faceValue + nextcard3.faceValue)
+    info.setScore(total)
+    if (total > 21) {
+        game.over(false)
+    } else if (total == 21) {
+        game.over(true)
+    }
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     game.reset()
 })
@@ -93,47 +124,18 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mysprite3.sayText(nextcard2.name)
     pause(2000)
     mysprite3.sayText("Hit or Stand? ")
-    pause(2000)
-    nextcard3 = myShoe.nextCard
-    mysprite4 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
-    mysprite4.setImage(myShoe.getCardImage(nextcard3, CardSpriteSize.ThirtyTwoByThirtyTwo))
-    mysprite4.sayText(nextcard3.name)
-    pause(2000)
-    total = nextCard.faceValue + (nextcard2.faceValue + nextcard3.faceValue)
-    info.setScore(total)
-    if (total > 21) {
-        game.over(false)
-    } else if (total == 21) {
-        game.over(true)
-    }
+    pause(5000)
 })
-let mysprite4: Sprite = null
-let nextcard3: Card = null
 let mysprite3: Sprite = null
-let nextcard2: Card = null
 let dealertotal = 0
 let mysprite5: Sprite = null
 let nextcard4: Card = null
-let total = 0
 let mySprite2: Sprite = null
+let nextcard2: Card = null
 let nextCard: Card = null
+let total = 0
+let mysprite4: Sprite = null
+let nextcard3: Card = null
 let myShoe: Shoe = null
 info.setScore(0)
 myShoe = playingCards.createPokerDeck()
@@ -172,7 +174,8 @@ let mySprite = sprites.create(img`
     `, SpriteKindLegacy.Player)
 mySprite.say("Welcome to Blackjack!")
 pause(2000)
+effects.clearParticles(mySprite)
 mySprite.say("Press A to start")
 effects.clearParticles(mySprite)
-pause(2000)
+pause(1000)
 mySprite.destroy()
